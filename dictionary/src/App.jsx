@@ -1,11 +1,13 @@
-//import { useState } from 'react'
-import './App.css'
+import "./App.css"
+import { Routes, Route } from "react-router-dom"
+import Dictionary from "./Dictionary"
 
 function App() {
-  //const [count, setCount] = useState(0)
-
   return (
     <>
+    <Routes>
+      <Route path="/" element={<Dictionary />}/>
+    </Routes>
     </>
   )
 }
