@@ -35,7 +35,7 @@ function Word({ word, deleteWord, changeWord }) {
   const [isEditing, setIsEditing] = useState(false);
   let content;
   if (isEditing) {
-    if (word.partOfTheLang === "Noun") {
+    if (word.partOfSpeech === "Noun") {
       content = (
         <form>
           <label htmlFor="name">Word:</label>
@@ -50,9 +50,9 @@ function Word({ word, deleteWord, changeWord }) {
           <select
             name="partOfSpeech"
             id="partOfSpeech"
-            value={word.partOfTheLang}
+            value={word.partOfSpeech}
             onChange={(e) => {
-              changeWord({ ...word, partOfTheLang: e.target.value });
+              changeWord({ ...word, partOfSpeech: e.target.value });
             }}
           >
             <option value="Noun">Noun</option>
@@ -67,9 +67,9 @@ function Word({ word, deleteWord, changeWord }) {
               changeWord({ ...word, gender: e.target.value });
             }}
           >
-            <option value="feminin">Feminin</option>
-            <option value="neutral">Neutral</option>
-            <option value="masculin">Masculin</option>
+            <option value="Feminin">Feminin</option>
+            <option value="Neutral">Neutral</option>
+            <option value="Masculin">Masculin</option>
           </select>
           <label htmlFor="plural">Plural Form:</label>
           <input
@@ -128,9 +128,9 @@ function Word({ word, deleteWord, changeWord }) {
           <select
             name="partOfSpeech"
             id="partOfSpeech"
-            value={word.partOfTheLang}
+            value={word.partOfSpeech}
             onChange={(e) => {
-              changeWord({ ...word, partOfTheLang: e.target.value });
+              changeWord({ ...word, partOfSpeech: e.target.value });
             }}
           >
             <option value="Noun">Noun</option>
@@ -172,7 +172,7 @@ function Word({ word, deleteWord, changeWord }) {
       );
     }
   } else {
-    if (word.partOfTheLang === "Verb") {
+    if (word.partOfSpeech === "Verb") {
       content = (
         <>
           <CardMedia sx={{ height: 140 }} image="" title="topic-img" />
@@ -181,7 +181,7 @@ function Word({ word, deleteWord, changeWord }) {
               {word.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Part of speech: {word.partOfTheLang}
+              Part of speech: {word.partOfSpeech}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Topic: {word.topic}
@@ -202,7 +202,7 @@ function Word({ word, deleteWord, changeWord }) {
               {word.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Part of speech: {word.partOfTheLang}
+              Part of speech: {word.partOfSpeech}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Gender: {word.gender}
