@@ -111,6 +111,7 @@ export default function AddWord ({ addWord }) {
           </Form>   
         </Formik>
       </div>
+
     )
 }
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -9,13 +9,11 @@ export default function WordList({ wordList, deleteWord, changeWord }) {
   if (wordList.length === 0) {
     return <p>No words in your Dictionary</p>;
   }
-  console.log(wordList);
   return (
     <>
       <h3>Dictionary</h3>
       <div>
         {wordList.map((word) => {
-          console.log(word);
           return (
             <Card sx={{ maxWidth: 345 }} key={word.id}>
               <Word
@@ -32,7 +30,32 @@ export default function WordList({ wordList, deleteWord, changeWord }) {
 }
 
 function Word({ word, deleteWord, changeWord }) {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false)
+  const [objectsWithImg, setObjectsWithImg] = useState([])
+
+  const fetchImages = async () => {
+  try {
+    let response = await fetch(
+      `${import.meta.env.VITE_SERVER_WORDS}/dictionary/topic_images/`
+    );
+    let data = await response.json();
+    setObjectsWithImg(data)
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+useEffect(() => {
+  fetchImages();
+}, []);
+
+let imageFromObject = objectsWithImg.map((obj) => {
+    return (
+        obj.name === word.topic ? 
+        <CardMedia key={obj.name} sx={{ height: 170 }} image={obj.image} title="topic-img" /> :
+        <img src="" />
+)});
+
   let content;
   if (isEditing) {
     if (word.partOfSpeech === "Noun") {
@@ -175,7 +198,7 @@ function Word({ word, deleteWord, changeWord }) {
     if (word.partOfSpeech === "Verb") {
       content = (
         <>
-          <CardMedia sx={{ height: 140 }} image="" title="topic-img" />
+          {imageFromObject}
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {word.name}
@@ -196,7 +219,7 @@ function Word({ word, deleteWord, changeWord }) {
     } else {
       content = (
         <>
-          <CardMedia sx={{ height: 140 }} image="" title="topic-img" />
+          {imageFromObject}
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {word.name}
