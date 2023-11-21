@@ -5,11 +5,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export default function WordList({ wordList, filter, deleteWord, changeWord }) {
+export default function WordList({ wordList, genderFilter, topicFilter,  deleteWord, changeWord }) {
     const filteredWordList = wordList.filter((word) =>
-    word.gender.toLowerCase().includes(filter.toLowerCase()));
+    word.gender.includes(genderFilter) 
+   && word.topic.includes(topicFilter) );
 
-  if (wordList.length === 0) {
+  if (wordList.length === 0 || filteredWordList.length === 0) {
     return <p>No words in your Dictionary</p>;
   } else if(filteredWordList === wordList) {
     return (
@@ -20,6 +21,7 @@ export default function WordList({ wordList, filter, deleteWord, changeWord }) {
               return (
                 <Card sx={{ maxWidth: 345 }} key={word.id}>
                   <Word
+                    key={word.id}
                     word={word}
                     changeWord={changeWord}
                     deleteWord={deleteWord}
@@ -39,6 +41,7 @@ export default function WordList({ wordList, filter, deleteWord, changeWord }) {
                 <Card sx={{ maxWidth: 345 }} key={word.id}>
                   <Word
                     word={word}
+                    key={word.id}
                     changeWord={changeWord}
                     deleteWord={deleteWord}
                   />
