@@ -5,28 +5,49 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export default function WordList({ wordList, deleteWord, changeWord }) {
+export default function WordList({ wordList, filter, deleteWord, changeWord }) {
+    const filteredWordList = wordList.filter((word) =>
+    word.gender.toLowerCase().includes(filter.toLowerCase()));
+
   if (wordList.length === 0) {
     return <p>No words in your Dictionary</p>;
-  }
-  return (
-    <>
-      <h3>Dictionary</h3>
-      <div>
-        {wordList.map((word) => {
-          return (
-            <Card sx={{ maxWidth: 345 }} key={word.id}>
-              <Word
-                word={word}
-                changeWord={changeWord}
-                deleteWord={deleteWord}
-              />
-            </Card>
-          );
-        })}
-      </div>
-    </>
-  );
+  } else if(filteredWordList === wordList) {
+    return (
+        <>
+          <h3>Dictionary</h3>
+          <div>
+            {wordList.map((word) => {
+              return (
+                <Card sx={{ maxWidth: 345 }} key={word.id}>
+                  <Word
+                    word={word}
+                    changeWord={changeWord}
+                    deleteWord={deleteWord}
+                  />
+                </Card>
+              );
+            })}
+          </div>
+        </>
+      );
+  } else {
+    return (
+          <div>
+            {filteredWordList.map((word) => {
+            <h3>{word.gender} Words</h3>
+              return (
+                <Card sx={{ maxWidth: 345 }} key={word.id}>
+                  <Word
+                    word={word}
+                    changeWord={changeWord}
+                    deleteWord={deleteWord}
+                  />
+                </Card>
+              );
+            })}
+          </div>
+    )
+  } 
 }
 
 function Word({ word, deleteWord, changeWord }) {
