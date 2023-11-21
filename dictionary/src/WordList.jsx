@@ -5,80 +5,94 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
-export default function WordList({ wordList, genderFilter, topicFilter,  deleteWord, changeWord }) {
-    const filteredWordList = wordList.filter((word) =>
-    word.gender.includes(genderFilter) 
-   && word.topic.includes(topicFilter) );
+export default function WordList({
+  wordList,
+  filteredWordList,
+  deleteWord,
+  changeWord
+}) {
+
+    
+
+  console.log(filteredWordList)
+  console.log(wordList)
+
 
   if (wordList.length === 0 || filteredWordList.length === 0) {
     return <p>No words in your Dictionary</p>;
-  } else if(filteredWordList === wordList) {
+  } else if (filteredWordList === wordList) { 
     return (
-        <>
-          <h3>Dictionary</h3>
-          <div>
-            {wordList.map((word) => {
-              return (
-                <Card sx={{ maxWidth: 345 }} key={word.id}>
-                  <Word
-                    key={word.id}
-                    word={word}
-                    changeWord={changeWord}
-                    deleteWord={deleteWord}
-                  />
-                </Card>
-              );
-            })}
-          </div>
-        </>
-      );
+      <>
+        <h3>Dictionary</h3>
+        <div>
+          {wordList.map((word) => {
+            return (
+              <Card sx={{ maxWidth: 345 }} key={word.id}>
+                <Word
+                  key={word.id}
+                  word={word}
+                  changeWord={changeWord}
+                  deleteWord={deleteWord}
+                />
+              </Card>
+            );
+          })}
+        </div>
+      </>
+    );
   } else {
     return (
-          <div>
-            {filteredWordList.map((word) => {
-            <h3>{word.gender} Words</h3>
-              return (
-                <Card sx={{ maxWidth: 345 }} key={word.id}>
-                  <Word
-                    word={word}
-                    key={word.id}
-                    changeWord={changeWord}
-                    deleteWord={deleteWord}
-                  />
-                </Card>
-              );
-            })}
-          </div>
-    )
-  } 
+      <div>
+        {filteredWordList.map((word) => {
+          <h3>{word.gender} Words</h3>;
+          return (
+            <Card sx={{ maxWidth: 345 }} key={word.id}>
+              <Word
+                word={word}
+                key={word.id}
+                changeWord={changeWord}
+                deleteWord={deleteWord}
+              />
+            </Card>
+          );
+        })}
+      </div>
+    );
+  }
 }
 
 function Word({ word, deleteWord, changeWord }) {
-  const [isEditing, setIsEditing] = useState(false)
-  const [objectsWithImg, setObjectsWithImg] = useState([])
+  const [isEditing, setIsEditing] = useState(false);
+  const [objectsWithImg, setObjectsWithImg] = useState([]);
 
   const fetchImages = async () => {
-  try {
-    let response = await fetch(
-      `${import.meta.env.VITE_SERVER_WORDS}/dictionary/topic_images/`
+    try {
+      let response = await fetch(
+        `${import.meta.env.VITE_SERVER_WORDS}/dictionary/topic_images/`
+      );
+      let data = await response.json();
+      setObjectsWithImg(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
+  let imageFromObject = objectsWithImg.map((obj) => {
+    return obj.name === word.topic ? (
+      <CardMedia
+        key={obj.name}
+        sx={{ height: 170 }}
+        image={obj.image}
+        title="topic-img"
+      />
+    ) : (
+      <img src="" />
     );
-    let data = await response.json();
-    setObjectsWithImg(data)
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-useEffect(() => {
-  fetchImages();
-}, []);
-
-let imageFromObject = objectsWithImg.map((obj) => {
-    return (
-        obj.name === word.topic ? 
-        <CardMedia key={obj.name} sx={{ height: 170 }} image={obj.image} title="topic-img" /> :
-        <img src="" />
-)});
+  });
 
   let content;
   if (isEditing) {
@@ -192,6 +206,7 @@ let imageFromObject = objectsWithImg.map((obj) => {
               changeWord({ ...word, topic: e.target.value });
             }}
           >
+            <option></option>
             <option value="Family">Family</option>
             <option value="Numbers">Numbers</option>
             <option value="Food">Food</option>

@@ -1,7 +1,45 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup'
+import { useState } from 'react';
+import { v4 as uuidv4 } from "uuid";
 
-export default function AddWord ({ addWord }) {
+export default function AddWord () {
+    const [wordList, setWordList] = useState([]);
+
+    const postWord = async (newWord) => {
+        try {
+          let response = await fetch(
+            `${import.meta.env.VITE_SERVER_WORDS}/dictionary`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(newWord),
+            }
+          );
+          if (response.status === 201) {
+            console.log("Word successfully was added to db");
+          } else {
+            let error = new Error("Could not add word to db");
+            throw error;
+          }
+        } catch (error) {
+          console.log(error.message);
+        }
+      };
+    
+      const addWord = (name, partOfSpeech, gender, plural, topic) => {
+        const newWord = {
+          name: name,
+          partOfSpeech: partOfSpeech,
+          gender: gender,
+          plural: plural,
+          topic: topic,
+          id: uuidv4(),
+        };
+        setWordList([...wordList, newWord]);
+        postWord(newWord);
+      };
+
     const initialValues = {
         name: "",
         partOfSpeech: "",
@@ -60,7 +98,7 @@ export default function AddWord ({ addWord }) {
             <div>
               <label htmlFor="partOfSpeech">Part Of Speech:</label>
               <Field as="select" id="partOfSpeech" name="partOfSpeech">
-                <option></option>
+            <option></option>
               <option value="Noun">Noun</option>
               <option value="Verb">Verb</option>
               </Field>
