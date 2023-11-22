@@ -1,15 +1,38 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
   color: rgba(255, 255, 255, 0.87);
   background-color: #444343;
 }
 
 * {
+  margin: 0;
   box-sizing: border-box;
 }
+
+nav {
+  display: flex;
+  background-color: #888;
+
+  }
+  
+  .nav-div {
+    margin: 20px;
+  }
+
+  .link {
+    color: #444343;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .link:hover {
+    color: #d0d1e9;
+  }  
+  
+  .active {
+    color: rgb(19, 19, 19);
+  }
 
 input,
 label {
@@ -34,6 +57,7 @@ label {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   row-gap: 30px;
+  margin: 4rem;
 }
 
 .card {
@@ -98,6 +122,23 @@ form button {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
   margin: 30px 5rem;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em 1em;
+  font-size: 1em;
+  font-weight: 300;
+  font-family: inherit;
+  background-color: #393838;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  margin: 5px;
+  color: rgba(255, 255, 255, 0.87);
+}
+button:hover {
+  border-color: #b3b4c9;
 }
 
 @media only screen and (min-width: 0) and (max-width: 700px) {
