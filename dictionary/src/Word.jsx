@@ -21,15 +21,13 @@ export default function Word({ word, deleteWord, changeWord }) {
   }, []);
 
   let imageFromObject = objectsWithImg.map((obj) => {
-    return obj.name === word.topic ? (
+    return obj.name === word.topic && (
       <img
         key={obj.name}
         src={obj.image}
         title="topic-img"
       />
-    ) : (
-      <img src="" />
-    );
+    )
   });
 
   let content;
@@ -54,6 +52,7 @@ export default function Word({ word, deleteWord, changeWord }) {
               changeWord({ ...word, partOfSpeech: e.target.value });
             }}
           >
+            <option></option>
             <option value="Noun">Noun</option>
             <option value="Verb">Verb</option>
           </select>
@@ -66,6 +65,7 @@ export default function Word({ word, deleteWord, changeWord }) {
               changeWord({ ...word, gender: e.target.value });
             }}
           >
+            <option></option>
             <option value="Feminin">Feminin</option>
             <option value="Neutral">Neutral</option>
             <option value="Masculin">Masculin</option>
@@ -87,6 +87,7 @@ export default function Word({ word, deleteWord, changeWord }) {
               changeWord({ ...word, topic: e.target.value });
             }}
           >
+            <option></option>
             <option value="Family">Family</option>
             <option value="Numbers">Numbers</option>
             <option value="Food">Food</option>
@@ -132,6 +133,7 @@ export default function Word({ word, deleteWord, changeWord }) {
               changeWord({ ...word, partOfSpeech: e.target.value });
             }}
           >
+            <option></option>
             <option value="Noun">Noun</option>
             <option value="Verb">Verb</option>
           </select>

@@ -5,11 +5,61 @@
   text-align: center;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 input, label {
   display: block;
 }
 
-img {
-  height: 170px;
-  object-fit: fill;
+.card img {
+  height: 190px;
+  width: 100%;
 }
+
+.card p {
+  margin: 7px;
+}
+
+.card button {
+  background-color: rgb(96, 95, 95);
+}
+
+.words-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  row-gap: 30px;
+}
+
+.card {
+  margin: 30px;
+  /* padding: 10px; */
+  color: rgb(33, 33, 33);
+}
+
+.neutral {
+  background-color: rgb(177, 217, 182);
+}
+
+.feminin {
+  background-color: rgb(228, 201, 206);
+}
+
+.masculin {
+  background-color: rgb(171, 189, 235);
+}
+
+.verb {
+  background-color: rgb(92, 90, 87);
+}
+
+@media only screen and (min-width: 650px) {
+
+.card {
+  width: 270px;
+  justify-self: center;
+}
+}
+
+
