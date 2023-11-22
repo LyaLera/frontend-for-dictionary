@@ -107,6 +107,11 @@ export default function Dictionary() {
       word.gender.includes(genderFilter) && word.topic.includes(topicFilter)
   );
 
+  const resetFilter = () => {
+    setGenderFilter("")
+    setTopicFilter("")
+  }
+
   return (
     <>
       <Filter
@@ -114,6 +119,7 @@ export default function Dictionary() {
         topicFilter={topicFilter}
         filterByGender={filterByGender}
         filterByTopic={filterByTopic}
+        resetFilter={resetFilter}
       />
       <WordList
         wordList={currentWords}

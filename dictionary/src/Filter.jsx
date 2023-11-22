@@ -3,8 +3,9 @@ export default function Filter({
   topicFilter,
   filterByGender,
   filterByTopic,
+  resetFilter
 }) {
-  return (
+  return ( 
     <>
       <label htmlFor="gender">Filter words by Gender</label>
       <select type="text" value={genderFilter} onChange={filterByGender}>
@@ -33,6 +34,8 @@ export default function Filter({
         <option value="Celebration">Celebration</option>
         <option value="Other">Other</option>
       </select>
+      <br/>
+      <button onClick={resetFilter}>Reset Filter</button>
     </>
   );
 }

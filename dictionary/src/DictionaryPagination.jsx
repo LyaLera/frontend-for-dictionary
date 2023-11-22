@@ -12,12 +12,13 @@ export default function DictionaryPagination({
   };
 
   return (
-    <Stack spacing={2} alignItems={"center"} color="white">
+    <Stack spacing={2} alignItems={"center"}>
       <Pagination
         count={nPages}
         page={currentPage}
         onChange={handleClick}
         variant="outlined"
+        sx={{color: "white"}}
       />
     </Stack>
   );

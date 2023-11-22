@@ -5,14 +5,11 @@
   text-align: center;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 input, label {
   display: block;
+}
+
+img {
+  height: 170px;
+  object-fit: fill;
 }

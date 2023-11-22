@@ -60,10 +60,12 @@ export default function AddWord () {
         .min(2, "Must be 2 characters or more")
         .matches(/[A-Za-z]/, "Only latin letters are allowed"),
         gender: Yup.string()
+        .required()
         .max(60, "Must be 60 characters or less")
         .min(2, "Must be 2 characters or more")
         .matches(/[A-Za-z]/, "Only latin letters are allowed"),
         plural: Yup.string()
+        .required()
         .max(60, "Must be 60 characters or less")
         .min(2, "Must be 2 characters or more")
         .matches(/[A-Za-z]/, "Only latin letters are allowed"),
@@ -106,7 +108,9 @@ export default function AddWord () {
             </div>
             <div>
               <label htmlFor="gender">Gender:</label>
-              <Field as="select" id="gender" name="gender">
+              <Field as="select" 
+              id="gender" 
+              name="gender">
               <option></option>
               <option value="Feminin">Feminin</option>
             <option value="Neutral">Neutral</option>
