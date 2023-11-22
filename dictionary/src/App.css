@@ -3,19 +3,23 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #444343;
 }
 
 * {
   box-sizing: border-box;
 }
 
-input, label {
+input,
+label {
   display: block;
 }
 
 .card img {
   height: 190px;
   width: 100%;
+  border-radius: 8px;
 }
 
 .card p {
@@ -36,8 +40,8 @@ input, label {
   width: 270px;
   justify-self: center;
   margin: 30px;
-  /* padding: 10px; */
   color: rgb(33, 33, 33);
+  border-radius: 8px;
 }
 
 .neutral {
@@ -66,7 +70,8 @@ form label {
   color: rgb(33, 33, 33);
 }
 
-form input, select {
+form input,
+select {
   padding: 8px;
   border-radius: 8px;
   background-color: rgb(96, 95, 95);
@@ -76,15 +81,33 @@ form input, select {
 
 form button {
   display: block;
-
 }
 
-/* @media only screen and (min-width: 650px) {
-
-.card {
-  width: 270px;
-  justify-self: center;
+.filter-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 30px;
+  align-items: center;
 }
-} */
 
+.filter-item select {
+  width: 70%;
+}
 
+.pagination {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+  margin: 30px 5rem;
+}
+
+@media only screen and (min-width: 0) and (max-width: 700px) {
+  .filter-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .filter-button  {
+    grid-column: span 2;
+    align-self: center;
+  }
+}

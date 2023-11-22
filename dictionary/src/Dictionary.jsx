@@ -1,23 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import WordList from "./WordList";
 import Filter from "./Filter";
 import DictionaryPagination from "./DictionaryPagination";
+
 
 export default function Dictionary() {
   const [wordList, setWordList] = useState([]);
   const [genderFilter, setGenderFilter] = useState("");
   const [topicFilter, setTopicFilter] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [wordsPerPage] = useState(6);
-  const indexOfLastWord = currentPage * wordsPerPage;
-  const indexOfFirstWord = indexOfLastWord - wordsPerPage;
-  const nPages = Math.ceil(wordList.length / wordsPerPage);
 
-    let currentWords = wordList.slice(
-      indexOfFirstWord,
-      indexOfLastWord
-    )
-
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalWordList, setTotalWordList] = useState(0)
+  const wordsPerPage = 6
 
   const fetchWords = async () => {
     try {
@@ -94,22 +88,31 @@ export default function Dictionary() {
     putEditedWord(changedWord);
   };
 
-  const filterByGender = (e) => {
-    setGenderFilter(e.target.value);
-  };
+  const pageNumbers = []
+  for (let i=1; i <= Math.ceil(totalWordList / wordsPerPage); i++) {
+    pageNumbers.push(i)
+  }
 
-  const filterByTopic = (e) => {
-    setTopicFilter(e.target.value);
-  };
+  const wordsData = useMemo(() => {
+    let computedWords = wordList
 
-  const filteredWordList = currentWords.filter(
-    (word) =>
-      word.gender.includes(genderFilter) && word.topic.includes(topicFilter)
-  );
+    if(genderFilter || topicFilter) {
+      computedWords = computedWords.filter(word =>
+        word.gender.includes(genderFilter) && word.topic.includes(topicFilter))
+    } 
+    setTotalWordList(computedWords.length)
+    return computedWords.slice(
+      (currentPage -1) * wordsPerPage,
+      (currentPage - 1) * wordsPerPage + wordsPerPage
+    )
+  }, [wordList, currentPage, genderFilter, topicFilter])
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const resetFilter = () => {
     setGenderFilter("")
     setTopicFilter("")
+    setCurrentPage(1)
   }
 
   return (
@@ -117,22 +120,18 @@ export default function Dictionary() {
       <Filter
         genderFilter={genderFilter}
         topicFilter={topicFilter}
-        filterByGender={filterByGender}
-        filterByTopic={filterByTopic}
+        setGenderFilter={setGenderFilter}
+        setTopicFilter={setTopicFilter}
+        setCurrentPage={setCurrentPage}
         resetFilter={resetFilter}
       />
       <WordList
-        wordList={currentWords}
+        wordList={wordList}
         deleteWord={deleteWord}
         changeWord={changeWord}
-        filteredWordList={filteredWordList}
+        wordsData={wordsData}
       />
-      <DictionaryPagination 
-              genderFilter={genderFilter}
-              topicFilter={topicFilter}
-      nPages={nPages}
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}/>
+      <DictionaryPagination pageNumbers={pageNumbers} paginate={paginate}/>
     </>
   );
 }

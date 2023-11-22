@@ -1,25 +1,14 @@
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 
-export default function DictionaryPagination({
-  nPages,
-  currentPage,
-  setCurrentPage
-}) {
-
-  const handleClick = (event, value) => {
-    setCurrentPage(value);
-  };
-
+export default function DictionaryPagination({ pageNumbers, paginate }) {
   return (
-    <Stack spacing={2} alignItems={"center"}>
-      <Pagination
-        count={nPages}
-        page={currentPage}
-        onChange={handleClick}
-        variant="outlined"
-        sx={{color: "white"}}
-      />
-    </Stack>
+    <div className="pagination">
+      {pageNumbers.map((number) => (
+        <div key={number} className="page-item">
+          <button onClick={() => paginate(number)} className="page-link">
+            {number}
+          </button>
+        </div>
+      ))}
+    </div>
   );
 }
