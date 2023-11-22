@@ -104,7 +104,7 @@ export default function Word({ word, deleteWord, changeWord }) {
             <option value="Celebration">Celebration</option>
             <option value="Other">Other</option>
           </select>
-          <button
+          <button className="form-button"
             onClick={() => {
               setIsEditing(false);
             }}
@@ -163,7 +163,7 @@ export default function Word({ word, deleteWord, changeWord }) {
             <option value="Celebration">Celebration</option>
             <option value="Other">Other</option>
           </select>
-          <button
+          <button className="form-button"
             onClick={() => {
               setIsEditing(false);
             }}

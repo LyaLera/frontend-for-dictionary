@@ -33,6 +33,8 @@ input, label {
 }
 
 .card {
+  width: 270px;
+  justify-self: center;
   margin: 30px;
   /* padding: 10px; */
   color: rgb(33, 33, 33);
@@ -54,12 +56,35 @@ input, label {
   background-color: rgb(92, 90, 87);
 }
 
-@media only screen and (min-width: 650px) {
+form {
+  display: grid;
+  justify-content: center;
+  padding-top: 45px;
+}
+
+form label {
+  color: rgb(33, 33, 33);
+}
+
+form input, select {
+  padding: 8px;
+  border-radius: 8px;
+  background-color: rgb(96, 95, 95);
+  border: none;
+  margin: 5px;
+}
+
+form button {
+  display: block;
+
+}
+
+/* @media only screen and (min-width: 650px) {
 
 .card {
   width: 270px;
   justify-self: center;
 }
-}
+} */
 
 
