@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Word({ word, deleteWord, changeWord }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -182,7 +183,12 @@ export default function Word({ word, deleteWord, changeWord }) {
             <h3>{word.name}</h3>
             <p>Part of speech: {word.partOfSpeech}</p>
             <p>Topic: {word.topic}</p>
-            <button>Translate with DeepL</button>
+            <NavLink
+              to="https://dict.leo.org/englisch-deutsch/"
+              target="_blank"
+            >
+              <button>Translate with Leo</button>
+            </NavLink>
             <br />
             <button onClick={() => setIsEditing(true)}>Edit</button>
             <button onClick={() => deleteWord(word.id)}>Delete</button>
@@ -199,7 +205,12 @@ export default function Word({ word, deleteWord, changeWord }) {
             <p>Gender: {word.gender}</p>
             <p>Plural: {word.plural}</p>
             <p>Topic: {word.topic}</p>
-            <button>Translate with DeepL</button>
+            <NavLink
+              to="https://dict.leo.org/englisch-deutsch/"
+              target="_blank"
+            >
+              <button>Translate with Leo</button>
+            </NavLink>
             <br />
             <button onClick={() => setIsEditing(true)}>Edit</button>
             <button onClick={() => deleteWord(word.id)}>Delete</button>
