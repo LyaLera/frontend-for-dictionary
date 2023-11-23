@@ -2,6 +2,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AddWord() {
   const [wordList, setWordList] = useState([]);
@@ -17,6 +19,7 @@ export default function AddWord() {
         }
       );
       if (response.status === 201) {
+        notify();
         console.log("Word successfully was added to db");
       } else {
         let error = new Error("Could not add word to db");
@@ -74,9 +77,33 @@ export default function AddWord() {
       .matches(/[A-Za-z]/, "Only latin letters are allowed"),
   });
 
+  const notify = () =>
+    toast.success("New word was successfuly added!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+    });
+
   return (
     <div className="addword-container">
       <h2>Add new word to the dictionary</h2>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover
+        theme="dark"
+      />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

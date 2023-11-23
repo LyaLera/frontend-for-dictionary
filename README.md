@@ -10,3 +10,4 @@
 9. Install MUI: 
 `npm install @mui/material @emotion/react @emotion/styled`
 `npm install @mui/material @mui/styled-engine-sc styled-components`
+10. Install react-toastify `npm install --save react-toastify`
