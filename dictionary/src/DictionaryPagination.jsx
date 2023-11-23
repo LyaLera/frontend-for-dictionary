@@ -1,13 +1,13 @@
 
 export default function DictionaryPagination({ pageNumbers, paginate }) {
   return (
-    <div className="pagination">
+    <div>
       {pageNumbers.map((number) => (
-        <div key={number} className="page-item">
-          <button onClick={() => paginate(number)} className="page-link">
+        <span key={number}>
+          <button onClick={() => paginate(number)}>
             {number}
           </button>
-        </div>
+        </span>
       ))}
     </div>
   );

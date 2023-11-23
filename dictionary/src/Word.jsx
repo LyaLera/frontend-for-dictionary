@@ -21,20 +21,18 @@ export default function Word({ word, deleteWord, changeWord }) {
   }, []);
 
   let imageFromObject = objectsWithImg.map((obj) => {
-    return obj.name === word.topic && (
-      <img
-        key={obj.name}
-        src={obj.image}
-        title="topic-img"
-      />
-    )
+    return (
+      obj.name === word.topic && (
+        <img key={obj.name} src={obj.image} title="topic-img" />
+      )
+    );
   });
 
   let content;
   if (isEditing) {
     if (word.partOfSpeech === "Noun") {
       content = (
-        <form>
+        <form className="editing-form">
           <label htmlFor="name">Word:</label>
           <input
             id="name"
@@ -104,7 +102,8 @@ export default function Word({ word, deleteWord, changeWord }) {
             <option value="Celebration">Celebration</option>
             <option value="Other">Other</option>
           </select>
-          <button className="form-button"
+          <button
+            className="form-button"
             onClick={() => {
               setIsEditing(false);
             }}
@@ -115,7 +114,7 @@ export default function Word({ word, deleteWord, changeWord }) {
       );
     } else {
       content = (
-        <form>
+        <form className="editing-form">
           <label htmlFor="name">Word:</label>
           <input
             id="name"
@@ -163,7 +162,8 @@ export default function Word({ word, deleteWord, changeWord }) {
             <option value="Celebration">Celebration</option>
             <option value="Other">Other</option>
           </select>
-          <button className="form-button"
+          <button
+            className="form-button"
             onClick={() => {
               setIsEditing(false);
             }}
@@ -179,15 +179,9 @@ export default function Word({ word, deleteWord, changeWord }) {
         <>
           {imageFromObject}
           <div>
-            <h3>
-              {word.name}
-            </h3>
-            <p>
-              Part of speech: {word.partOfSpeech}
-            </p>
-            <p>
-              Topic: {word.topic}
-            </p>
+            <h3>{word.name}</h3>
+            <p>Part of speech: {word.partOfSpeech}</p>
+            <p>Topic: {word.topic}</p>
             <button>Translate with DeepL</button>
             <br />
             <button onClick={() => setIsEditing(true)}>Edit</button>
@@ -200,21 +194,11 @@ export default function Word({ word, deleteWord, changeWord }) {
         <>
           {imageFromObject}
           <div>
-            <h3>
-              {word.name}
-            </h3>
-            <p>
-              Part of speech: {word.partOfSpeech}
-            </p>
-            <p>
-              Gender: {word.gender}
-            </p>
-            <p>
-              Plural: {word.plural}
-            </p>
-            <p>
-              Topic: {word.topic}
-            </p>
+            <h3>{word.name}</h3>
+            <p>Part of speech: {word.partOfSpeech}</p>
+            <p>Gender: {word.gender}</p>
+            <p>Plural: {word.plural}</p>
+            <p>Topic: {word.topic}</p>
             <button>Translate with DeepL</button>
             <br />
             <button onClick={() => setIsEditing(true)}>Edit</button>

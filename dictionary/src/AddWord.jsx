@@ -75,15 +75,15 @@ export default function AddWord() {
   });
 
   return (
-    <div>
+    <div className="addword-container">
       <h2>Add new word to the dictionary</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           if (values.partOfSpeech === "Verb") {
-            values.gender === "" ? values.gender = "None" : values.gender;
-            values.plural === "" ? values.plural = "None" : values.plural;
+            values.gender === "" ? (values.gender = "None") : values.gender;
+            values.plural === "" ? (values.plural = "None") : values.plural;
           }
           addWord(
             values.name,
@@ -95,14 +95,14 @@ export default function AddWord() {
           resetForm();
         }}
       >
-        {props => (
-          <Form>
-            <div>
+        {(props) => (
+          <Form className="addword-form">
+            <div className="addword-field">
               <label htmlFor="name">New Word</label>
               <Field type="text" id="name" name="name" />
               <ErrorMessage name="name" />
             </div>
-            <div>
+            <div className="addword-field">
               <label htmlFor="partOfSpeech">Part Of Speech:</label>
               <Field as="select" id="partOfSpeech" name="partOfSpeech">
                 <option></option>
@@ -113,7 +113,7 @@ export default function AddWord() {
             </div>
             {props.values.partOfSpeech === "Noun" && (
               <>
-                <div>
+                <div className="addword-field">
                   <label htmlFor="gender">Gender:</label>
                   <Field as="select" id="gender" name="gender">
                     <option></option>
@@ -123,35 +123,38 @@ export default function AddWord() {
                   </Field>
                   <ErrorMessage name="gender" />
                 </div>
-                <div>
+                <div className="addword-field">
                   <label htmlFor="plural">Plural form:</label>
                   <Field type="text" id="plural" name="plural" />
                   <ErrorMessage name="plural" />
                 </div>
               </>
             )}
-            <label htmlFor="topic">Topic:</label>
-            <Field as="select" id="topic" name="topic">
-              <option></option>
-              <option value="Family">Family</option>
-              <option value="Numbers">Numbers</option>
-              <option value="Food">Food</option>
-              <option value="Apartment">Apartment</option>
-              <option value="Time">Time</option>
-              <option value="Free Time">Free Time</option>
-              <option value="Weather">Weather</option>
-              <option value="Profession and Work">Profession and Work</option>
-              <option value="Health">Health</option>
-              <option value="Body">Body</option>
-              <option value="Transport">Transport</option>
-              <option value="Infrastructure">Infrastructure</option>
-              <option value="Clothes">Clothes</option>
-              <option value="Celebration">Celebration</option>
-              <option value="Other">Other</option>
-            </Field>
-            <ErrorMessage name="topic" />
-            <br />
-            <button type="submit">Add word</button>
+            <div className="addword-field">
+              <label htmlFor="topic">Topic:</label>
+              <Field as="select" id="topic" name="topic">
+                <option></option>
+                <option value="Family">Family</option>
+                <option value="Numbers">Numbers</option>
+                <option value="Food">Food</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Time">Time</option>
+                <option value="Free Time">Free Time</option>
+                <option value="Weather">Weather</option>
+                <option value="Profession and Work">Profession and Work</option>
+                <option value="Health">Health</option>
+                <option value="Body">Body</option>
+                <option value="Transport">Transport</option>
+                <option value="Infrastructure">Infrastructure</option>
+                <option value="Clothes">Clothes</option>
+                <option value="Celebration">Celebration</option>
+                <option value="Other">Other</option>
+              </Field>
+              <ErrorMessage name="topic" />
+            </div>
+            <div className="addword-field">
+              <button type="submit">Add word</button>
+            </div>
           </Form>
         )}
       </Formik>

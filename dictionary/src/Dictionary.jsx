@@ -3,15 +3,14 @@ import WordList from "./WordList";
 import Filter from "./Filter";
 import DictionaryPagination from "./DictionaryPagination";
 
-
 export default function Dictionary() {
   const [wordList, setWordList] = useState([]);
   const [genderFilter, setGenderFilter] = useState("");
   const [topicFilter, setTopicFilter] = useState("");
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [totalWordList, setTotalWordList] = useState(0)
-  const wordsPerPage = 6
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalWordList, setTotalWordList] = useState(0);
+  const wordsPerPage = 6;
 
   const fetchWords = async () => {
     try {
@@ -39,7 +38,6 @@ export default function Dictionary() {
         }
       );
       console.log(response);
-      alert("Word was deleted in a server");
     } catch (error) {
       console.log(error);
     }
@@ -88,32 +86,34 @@ export default function Dictionary() {
     putEditedWord(changedWord);
   };
 
-  const pageNumbers = []
-  for (let i=1; i <= Math.ceil(totalWordList / wordsPerPage); i++) {
-    pageNumbers.push(i)
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(totalWordList / wordsPerPage); i++) {
+    pageNumbers.push(i);
   }
 
   const wordsData = useMemo(() => {
-    let computedWords = wordList
+    let computedWords = wordList;
 
-    if(genderFilter || topicFilter) {
-      computedWords = computedWords.filter(word =>
-        word.gender.includes(genderFilter) && word.topic.includes(topicFilter))
-    } 
-    setTotalWordList(computedWords.length)
+    if (genderFilter || topicFilter) {
+      computedWords = computedWords.filter(
+        (word) =>
+          word.gender.includes(genderFilter) && word.topic.includes(topicFilter)
+      );
+    }
+    setTotalWordList(computedWords.length);
     return computedWords.slice(
-      (currentPage -1) * wordsPerPage,
+      (currentPage - 1) * wordsPerPage,
       (currentPage - 1) * wordsPerPage + wordsPerPage
-    )
-  }, [wordList, currentPage, genderFilter, topicFilter])
+    );
+  }, [wordList, currentPage, genderFilter, topicFilter]);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const resetFilter = () => {
-    setGenderFilter("")
-    setTopicFilter("")
-    setCurrentPage(1)
-  }
+    setGenderFilter("");
+    setTopicFilter("");
+    setCurrentPage(1);
+  };
 
   return (
     <>
@@ -131,7 +131,7 @@ export default function Dictionary() {
         changeWord={changeWord}
         wordsData={wordsData}
       />
-      <DictionaryPagination pageNumbers={pageNumbers} paginate={paginate}/>
+      <DictionaryPagination pageNumbers={pageNumbers} paginate={paginate} />
     </>
   );
 }

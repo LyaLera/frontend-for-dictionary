@@ -13,26 +13,25 @@
 nav {
   display: flex;
   background-color: #888;
+}
 
-  }
-  
-  .nav-div {
-    margin: 20px;
-  }
+.nav-div {
+  margin: 20px;
+}
 
-  .link {
-    color: #444343;
-    font-weight: bold;
-    text-decoration: none;
-  }
+.link {
+  color: #444343;
+  font-weight: bold;
+  text-decoration: none;
+}
 
-  .link:hover {
-    color: #d0d1e9;
-  }  
-  
-  .active {
-    color: rgb(19, 19, 19);
-  }
+.link:hover {
+  color: #d0d1e9;
+}
+
+.active {
+  color: rgb(19, 19, 19);
+}
 
 input,
 label {
@@ -42,15 +41,12 @@ label {
 .card img {
   height: 190px;
   width: 100%;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .card p {
   margin: 7px;
-}
-
-.card button {
-  background-color: rgb(96, 95, 95);
 }
 
 .words-container {
@@ -81,10 +77,10 @@ label {
 }
 
 .verb {
-  background-color: rgb(92, 90, 87);
+  background-color: rgb(223, 196, 156);
 }
 
-form {
+.editing-form {
   display: grid;
   justify-content: center;
   padding-top: 45px;
@@ -94,7 +90,7 @@ form label {
   color: rgb(33, 33, 33);
 }
 
-form input,
+.editing-form input,
 select {
   padding: 8px;
   border-radius: 8px;
@@ -118,12 +114,6 @@ form button {
   width: 70%;
 }
 
-.pagination {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-  margin: 30px 5rem;
-}
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -131,7 +121,7 @@ button {
   font-size: 1em;
   font-weight: 300;
   font-family: inherit;
-  background-color: #393838;
+  background-color: rgb(96, 95, 95);
   cursor: pointer;
   transition: border-color 0.25s;
   margin: 5px;
@@ -140,6 +130,43 @@ button {
 button:hover {
   border-color: #b3b4c9;
 }
+h2 {
+  color: #9c9b9b;
+  margin: 30px 0;
+}
+
+.addword-container {
+  display: grid;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.addword-form {
+  display: grid;
+  justify-content: center;
+  background-color: #888;
+  width: 350px;
+  padding-bottom: 15px;
+  border-radius: 8px;
+}
+
+.addword-field {
+  padding: 1rem;
+  margin: 5px;
+  display: grid;
+}
+
+.addword-field label {
+  margin-bottom: 5px;
+}
+
+.addword-field input,
+select {
+  border-radius: 8px;
+  background-color: rgb(96, 95, 95);
+  border: none;
+  padding: 8px;
+}
 
 @media only screen and (min-width: 0) and (max-width: 700px) {
   .filter-container {
@@ -147,7 +174,7 @@ button:hover {
     grid-template-rows: auto;
   }
 
-  .filter-button  {
+  .filter-button {
     grid-column: span 2;
     align-self: center;
   }
